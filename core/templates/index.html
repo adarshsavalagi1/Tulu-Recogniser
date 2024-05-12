@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      
+      gtag('config', 'G-2QY9YRQJX3')
+    </script>
+    
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      
+      gtag('config', 'G-QP095M54BN')
+    </script>
+  
+
+    <title>Tulu Transcriptor </title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="NWlMuFy2u-b83Thy1eR0OxHVKHLIC6L8PPXZF3uorOw" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f8f9fa;
+          padding: 20px;
+      }
+
+      h1 {
+          color: #333;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      #imageForm {
+          
+          flex-direction: column;
+          align-items: center;
+          border: 2px solid #ccc;
+          border-radius: 8px;
+          padding: 20px;
+          background-color: #fff;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          max-width: 400px;
+          margin: 0 auto;
+      }
+
+      input[type="file"] {
+          margin-bottom: 15px;
+      }
+
+      button[type="submit"] {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      button[type="submit"]:hover {
+          background-color: #0056b3;
+      }
+
+      #predictionResult {
+          margin-top: 20px;
+          text-align: center;
+          font-weight: bold;
+      }
+
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+    .copy-btn{
+      background-color: #007bff;
+          color: #fff;
+          border: none;
+          font-size: 16px;
+          padding: 10px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+    }
+  </style>
+  </head>
+
+  <body style="background-color:#212121;">
+    <nav class="navbar" >
+      <div class="navbar-center">
+          <h1 class="navbar-heading" style="color: #f0f0f0;">Tulu Transcriptor</h1>
+      </div>
+  </nav>
+    <!-- loading -->
+    <div class="loading" style="height: 100%; width: 100%; position: fixed; background: black; z-index: 10; display: block;">
+      <h3 style="color: white;top:15px;position:relative;">Loading...</h3>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(window).on('load', function () {
+        $('.loading').fadeOut('slow')
+      })
+    </script>
+
+<div style="background-color: #212121; padding: 20px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+      <p style="color: white; font-size: 18px; margin: 0;">Description Language:</p>
+      <select name="language" id="lang" style="font-size: 16px;">
+          <option value="english">English</option>
+          <option value="tulu">Tulu</option>
+          <option value="kannada">Kannada</option>
+          <option value="malayalam">Malayalam</option>
+      </select>
+  </div>
+  <div style="padding: 10px; background-color: #333; border-radius: 5px;">
+      <p id="kanlang" style="color: white; display: none;">ಕನ್ನಡದಲ್ಲಿ/ಮಲಯಾಳಂನಲ್ಲಿ ಬರೆದ ಪಠ್ಯವನ್ನು ತುಳುವಿಗೆ ಬದಲಾಯಿಸಬೇಕಿದ್ದರೆ ಕೆಳಗೆ ಇರುವ ಜಾಗದಲ್ಲಿ ಬರೆಯಿರಿ. ಏನಾದರೂ ಸಮಸ್ಯೆ ಇದ್ದರೆ ಸಂಘಟನೆಯ ಈಮೈಲ್ ವಿಳಾಸಕ್ಕೆ ಸಂದೇಶ ಕಳುಹಿಸಿ.</p>
+      <p id="mallang" style="color: white; display: none;">കന്നഡ/മലയാളത്തിൽ എഴുതുന്ന വാചകം തുളുവിലേക്ക് മാറ്റണമെങ്കിൽ താഴെ നൽകിയിരിക്കുന്ന സ്ഥലത്ത് എഴുതുക. എന്തെങ്കിലും പ്രശ്നമുണ്ടെങ്കിൽ സംഘടനയുടെ ഇമെയിൽ വിലാസത്തിലേക്ക് ഒരു സന്ദേശം അയയ്ക്കുക.</p>
+      <p id="tululang" style="color: white; display: none; font-family: tulu; font-size: 16px;">knAnw/mLyaLMwA&nbsp;&nbsp;bertin pedaelnA&nbsp;&nbsp;tulukA&nbsp;&nbsp;bdlieser titfA&nbsp;&nbsp;ekatfin jaegwA&nbsp;&nbsp;berel. dal etaMdor AitAtAMw sMgd AIXeXemlAXgA&nbsp;&nbsp;esalAlMj mlApuel</p>
+      <p id="englang" style="color: white; display: block; font-size: 16px;">If you need to change the text written in Kannada/Malayalam to Tulu, write in the space below. If you have any queries please email us.</p>
+  </div>
+
+  <div style="margin-top: 15px;">
+      <label style="color: white; font-size: 16px;">Transcript from:</label>
+      <select name="fromlang" id="fromlang" style="font-size: 16px;">
+          <option value="kannada">Kannada</option>
+          <option value="malayalam">Malayalam</option>
+          <option value="hindi">Hindi</option>
+      </select>
+  </div>
+
+  <div style="margin-top: 10px;">
+      <label style="color: white; font-size: 16px;">
+          <input type="checkbox" id="spcl" class="spcl" name="spcl" onclick="fromlang()" checked />
+          Enable special characters
+      </label>
+  </div>
+</div>
+
+<div class="main" style="padding: 20px; background-color: #f0f0f0; border-radius: 10px;">
+  <div id="uvw">
+      <textarea type="text" class="txt" id="txt" placeholder="Type in Kannada" style="background-color: white; border: 1px solid #ccc; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;"></textarea>
+  </div>
+  <div style="margin-top: 10px;">
+      <textarea type="text" class="resu" id="resu" placeholder="" style="font-family: tulu2; background-color: white; font-size: 18px; border: 1px solid #ccc; border-radius: 5px; padding: 10px; width: 100%; margin-top: -9px; box-sizing: border-box;" readonly></textarea>
+  </div>
+</div>
+    <br>
+    <button onclick="copy()" class="copy-btn">Copy</button>
+    <br /><br />
+
+    
+    <form method="post" enctype="multipart/form-data" id="imageForm">
+        {% csrf_token %}
+        <h1>Image Upload</h1>
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Predict Character</button>
+    </form>
+
+    <div id="predictionResult" style="color: #FF0000; font-size: 20px;"></div>
+
+    <br>
+
+
+    <div style="margin-left: 20px; padding: 15px; border: 2px solid #ccc; border-radius: 10px; background-color: #f8f8f8; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+      <!-- special characters explain in english -->
+      <p id="englang2" style="color: #FF0000; font-size: 16px; line-height: 1.6;">
+          To use special characters of Tulu language, add <span class="">"*"</span> after the special character. Example: <br />
+          1. <span class="">"ಮಲ್ಪುವೆ*" or "മല്പുവെ*"</span> gives <span class="">"mlApuov"</span> and
+          <span class="">"ಮಲ್ಪುವೇ*" or "മല്പുവേ*"</span> gives <span class="">"mlApuOv"</span><br />
+          2. <span class="">"ಎ*" or "എ*"</span> gives <span class="">"oA"</span> and <span class="">"ಏ*" or "ഏ*"</span> gives <span class="">"OA"</span><br />
+          3. <span class="">"ಕು*" or "കു*"</span> gives <span class="">"kuA"</span>
+      </p>
+  
+      <!-- kannada special explain in kannada -->
+      <p id="kanlang2" style="display: none; color: #FF0000; font-size: 16px; line-height: 1.6;">
+          ವಿಶೇಷ ಅಕ್ಷರಗಳನ್ನು ಬಳಸಲು ವಿಶೇಷ ಅಕ್ಷರದ ನಂತರ "*" ಬಳಸಿ. ಉದಾ: <br />
+          1. <span class="">"ಮಲ್ಪುವೆ*" ಅಥವಾ "മല്പുവെ*"</span> ಬರೆದರೆ <span class="">"mlApuov"</span>
+          ಹಿಂತಿರುಗಿಸುತ್ತದೆ ಮತ್ತು <span class="">"ಮಲ್ಪುವೇ*" ಅಥವಾ "മല്പുവേ*"</span> ಬರೆದರೆ <span class="">"mlApuOv"</span> ಹಿಂತಿರುಗಿಸುತ್ತದೆ.
+          <br />2. <span class="">"ಎ*" ಅಥವಾ "എ*"</span> ಬರೆದರೆ <span class="">"oA"</span>
+          ಹಿಂತಿರುಗಿಸುತ್ತದೆ ಮತ್ತು <span class="">"ಏ*" ಅಥವಾ "ഏ*"</span> ಬರೆದರೆ <span class="">"OA"</span>
+          ‍ಹಿಂತಿರುಗಿಸುತ್ತದೆ.<br />
+          3. <span class="">"ಕು*" ಅಥವಾ "കു*"</span> ಬರೆದರೆ <span class="">"kuA"</span> ಹಿಂತಿರುಗಿಸುತ್ತದೆ
+      </p>
+      <!-- special characters explain in tulu -->
+      <p id="tululang2" style="font-family: tulu; display: none; color: #FF0000; font-size: 16px; line-height: 1.6;">
+          viESx AAecAcaeraelnA&nbsp; gleser viESx AAecAcaerad eAduru "*" paewAl.
+          <br />1. <span class="">"ಮಲ್ಪುವೆ*" AAtAtAMw "മല്പുവെ*"</span> berMw <span class="">"mlApuov"</span>
+          bpfuMwu ebak <span class="">"ಮಲ್ಪುವೇ*" AAtAtAMw "മല്പുവേ*"</span> berMw <span class="">"mlApuOv"</span> bpfuMwu.
+          <br />2. <span class="">"ಎ*" AAtAtAMw "എ*"</span> berMw <span class="">"oA"</span> bpfuMwu ebak
+          <span class="">"ಏ*" AAtAtAMw "ഏ*"</span> berMw <span class="">"OA"</span> bpfuMwu.<br />
+          3. <span class="">"ಕು*" AAtAtAMw "കു*"</span> berMw <span class="">"kuA"</span> bpfuMwu
+      </p>
+      <!-- special characters explain in Malayalam -->
+      <p id="mallang2" style="display:none; color: #FF0000; font-size: 16px; line-height: 1.6;">
+          പ്രത്യേക പ്രതീകങ്ങൾ പ്രവർത്തനക്ഷമമാക്കുന്നതിന് പ്രത്യേക പ്രതീകത്തിന് ശേഷം
+          <span class="">"*"</span> ഉപയോഗിക്കുക. ഉദാ:<br />
+          1. <span class="">"ಮಲ್ಪುವೆ*" അല്ലെങ്കിൽ "മല്പുവെ*"</span> എന്ന് എഴുതുന്നത് <span class="">"mlApuov"</span> എന്നും <span class="">"ಮല്പುവೇ*" അല്ലെങ്കിൽ "മല്പുവേ*"</span>
+          എന്നും എഴുതുന്നത് <span class="darkblue tulu">"mlApuOv"</span> എന്നും നൽകുന്നു.<br />
+          2. <span class="">"ಎ*" അല്ലെങ്കിൽ "എ*"</span> എന്നത് <span class="">"oA"</span> എന്നും <span class="">"ಏ*" അല്ലെങ്കിൽ "ഏ*"</span> എന്നത് <span class="">"OA"</span> എന്നും നൽകും.<br />
+          3. <span class="">"ಕು*" അല്ലെങ്കിൽ "കു*"</span> എന്നത് <span class="">"kuA"</span> തിരികെ നൽകും.
+      </p>
+  </div>
+  
+    <p style="font-size:80%; margin-left: 3px; color: #FF0000;">
+      If you find any error <a href="{% url 'comingsoon' %}" style="text-decoration: none;">report here</a>
+    </p>
+    <div class="footer">
+      <p>&copy; 2024 Department Of AIML | All rights reserved.</p>
+  </div>
+    <script src="{% static 'assets/js/k2t/script.js' %} "></script>
+    <script src="{% static 'assets/js/m2t/script.js' %} "></script>
+    <script src="{% static 'assets/js/h2t/script.js' %} "></script>
+
+    <script>
+      document.getElementById('txt').addEventListener('input', fromlang)
+      document.getElementById('fromlang').addEventListener('change', fromlang)
+      function fromlang() {
+        let fromlang = document.getElementById('fromlang').value
+        if (fromlang == 'kannada') {
+          kanfunc()
+        } else if (fromlang == 'malayalam') {
+          malfunc()
+        } else {
+          hinfunc()
+        }
+      }
+      
+      /*Description language changing function*/
+      document.getElementById('lang').addEventListener('change', lang)
+      document.getElementById('fromlang').addEventListener('input', lang)
+      function lang() {
+        let lang = document.getElementById('lang').value
+      
+        if (lang == 'english') {
+          document.getElementById('englang').style.display = 'block'
+          document.getElementById('englang2').style.display = 'block'
+          document.getElementById('tululang').style.display = 'none'
+          document.getElementById('tululang2').style.display = 'none'
+          document.getElementById('kanlang').style.display = 'none'
+          document.getElementById('kanlang2').style.display = 'none'
+          document.getElementById('mallang').style.display = 'none'
+          document.getElementById('mallang2').style.display = 'none'
+          if (document.getElementById('fromlang').value == 'kannada') {
+            document.getElementById('txt').placeholder = 'type in kannada'
+          } else if (document.getElementById('fromlang').value == 'malayalam') {
+            document.getElementById('txt').placeholder = 'type in malayalam'
+          }
+          document.getElementById('txt').style.fontFamily = ''
+        } else if (lang == 'tulu') {
+          document.getElementById('englang').style.display = 'none'
+          document.getElementById('englang2').style.display = 'none'
+          document.getElementById('tululang').style.display = 'block'
+          document.getElementById('tululang2').style.display = 'block'
+          document.getElementById('kanlang').style.display = 'none'
+          document.getElementById('kanlang2').style.display = 'none'
+          document.getElementById('mallang').style.display = 'none'
+          document.getElementById('mallang2').style.display = 'none'
+          if (document.getElementById('fromlang').value == 'kannada') {
+            document.getElementById('txt').placeholder = 'knAnwwA  berel'
+          } else if (document.getElementById('fromlang').value == 'malayalam') {
+            document.getElementById('txt').placeholder = 'mlyaLMwA  berel'
+          }
+          document.getElementById('txt').style.fontFamily = 'tulu2'
+        } else if (lang == 'kannada') {
+          document.getElementById('englang').style.display = 'none'
+          document.getElementById('englang2').style.display = 'none'
+          document.getElementById('tululang').style.display = 'none'
+          document.getElementById('tululang2').style.display = 'none'
+          document.getElementById('kanlang').style.display = 'block'
+          document.getElementById('kanlang2').style.display = 'block'
+          document.getElementById('mallang').style.display = 'none'
+          document.getElementById('mallang2').style.display = 'none'
+          if (document.getElementById('fromlang').value == 'kannada') {
+            document.getElementById('txt').placeholder = 'ಕನ್ನಡದಲ್ಲಿ ಬರೆಯಿರಿ'
+          } else if (document.getElementById('fromlang').value == 'malayalam') {
+            document.getElementById('txt').placeholder = 'ಮಲಯಾಳಂನಲ್ಲಿ ಬರೆಯಿರಿ'
+          }
+          document.getElementById('txt').style.fontFamily = ''
+        } else if (lang == 'malayalam') {
+          document.getElementById('englang').style.display = 'none'
+          document.getElementById('englang2').style.display = 'none'
+          document.getElementById('tululang').style.display = 'none'
+          document.getElementById('tululang2').style.display = 'none'
+          document.getElementById('kanlang').style.display = 'none'
+          document.getElementById('kanlang2').style.display = 'none'
+          document.getElementById('mallang').style.display = 'block'
+          document.getElementById('mallang2').style.display = 'block'
+          if (document.getElementById('fromlang').value == 'kannada') {
+            document.getElementById('txt').placeholder = 'കന്നഡയിൽ എഴുതുക'
+          } else if (document.getElementById('fromlang').value == 'malayalam') {
+            document.getElementById('txt').placeholder = 'മലയാളത്തിൽ എഴുതുക'
+          }
+          document.getElementById('txt').style.fontFamily = ''
+        }
+      }
+      
+      /*Copy function*/
+      function copy() {
+        var copyText = document.getElementById('resu')
+      
+        copyText.select()
+        copyText.setSelectionRange(0, 99999) /* For mobile devices */
+      
+        navigator.clipboard.writeText(copyText.value.replace(/A  /g, 'A '))
+      
+        alert('Copied the text')
+      }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QP095M54BN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      
+      gtag('config', 'G-QP095M54BN')
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#imageForm').submit(function(event) {
+                event.preventDefault();  // Prevent the default form submission
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "{% url 'index' %}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#predictionResult').html("Predicted Character: " + response.predicted_label);
+                    },
+                    error: function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);  // Log any errors to the console
+                    }
+                });
+            });
+        });
+    </script>
+
+
+  </body>
+</html>
